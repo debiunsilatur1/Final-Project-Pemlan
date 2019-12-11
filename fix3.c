@@ -430,8 +430,75 @@ void coctailsortEkstensi2(struct extensi ex[30],int n){
 }
 //seaching
 
+void viewsearch(int n,struct extensi ex[30]){
+	printf("Data ekstensi \n");
+	printf("\n ID file     : %d", ex[n].ID);
+	printf("\n Nama fle    : %s", ex[n].name_file);
+	printf("\n owner       : %s", ex[n].owner);
+	printf("\n jenis file  : %s", ex[n].jenis);
+	printf("\n ekstensi    : %s", ex[n].eks);
+	printf("\n\n");	
+}
+
+int interpolation1(struct extensi ex[30],int n, int c){
+	int f,fh,vi;
+	f=0;
+	fh = n-1;
+	int flag=-1;
+	while(f<=fh && c>=ex[f].ID && c<=ex[fh].ID){
+		vi = (c-ex[f].ID)/(ex[fh].ID-ex[f].ID) * (fh-f)+f;
+//		printf("%d\t%d\t%d",f,fh,vi);
+		if(ex[vi].ID==c){
+			flag=1;
+			break;
+		}
+		else if(ex[vi].ID>c){
+			 fh = vi-1;
+		}
+		else if(c>ex[vi].ID){
+			f = vi+1;
+		}
+		
+	}
+	if(flag==-1){
+		printf("\nData tidak ditemukan");		
+	}
+	else{
+		viewsearch(vi,ex);
+	}
+}
+
+//int interpolation1(struct extensi ex[30],int i, int c){
+//	int f,fh,vi;
+//	f=0;
+//	fh = i;
+//	int flag=-1;
+//	while(f<=fh && c>=ex[f].ID && c<=ex[fh].ID){
+//		vi = ((c-ex[f].ID)/(ex[fh].ID-ex[f].ID)) * (fh-f) + f;	
+//		
+//		if(ex[vi].ID==c){
+//			flag=1;
+//			//break;
+//		}
+//		else if(ex[vi].ID>c){
+//			 fh = vi-1;
+//		}
+//		else if(ex[vi].ID<c){
+//			f = vi+1;
+//		}
+//		
+//	}
+//	
+//	if(flag==-1){
+//		printf("\nData tidak ditemukan");		
+//	}
+//	else{
+//		viewsearch(i,ex);
+//	}
+//}
 	
-	
+		
+
 main(){ //c = key
 	struct extensi ex[50];
 	int pilih =-1,i,c,j,sort,ngurut;
@@ -534,6 +601,40 @@ main(){ //c = key
 									break;
 						}
 			}
+			break;			
+			case 4://search
+			printf("============================");
+			printf("\n");
+			printf("\nMasukkan Id Pencarian : ");
+			scanf("%d",&c);
+			coctailsortID1(ex,i);
+			interpolation1(ex,i,c);
+//			int low =0;
+//			int high = i-1;
+//			int posisi;
+//			
+//			do{
+//				posisi = (c-ex[low].ID) /(ex[low].ID-ex[high].ID)*(high-low)+low;
+//				
+//				if(ex[posisi].ID==c){
+//					printf("\ndata %d ditemukan",c);
+//					break;
+//				}	
+//				else if(ex[posisi].ID>c){
+//					high = posisi - 1;
+//				}
+//				else if(ex[posisi].ID<c){
+//					low = posisi + 1;
+//				}
+//			}
+//			while (c >= ex[low].ID && c <= ex[high].ID);
+//			if(ex[posisi].ID< c){
+//				printf("tidak ada");
+//			}
+//			else if(ex[posisi].ID > c){
+//				printf("tidak ada");
+//			}
+			break;
 						
 			
 			case 5:
